@@ -84,10 +84,9 @@ void loop()
         UPDATEFAST();   
         
         FAST_50ms() {   // We process the logic and relevant input and output every 50 milliseconds
-      	    DigIn(INPUTPIN, Souliss_T1n_ToggleCmd, MYLEDLOGIC);
-            LowDigIn(INPUTPIN, Souliss_T1n_ToggleCmd, MYLEDLOGIC);
+      	    DigIn2State(INPUTPIN, Souliss_T1n_ToggleCmd, Souliss_T1n_ToggleCmd, MYLEDLOGIC);
             Logic_SimpleLight(MYLEDLOGIC);
-            DigOut(OUTPUTPIN, Souliss_T1n_PulseCoil,MYLEDLOGIC);
+            DigOut(OUTPUTPIN, Souliss_T1n_Coil,MYLEDLOGIC);
         }
 
         FAST_2110ms()
