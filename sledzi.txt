@@ -1,0 +1,2 @@
+Push on- push off =DigIn(INPUTPIN, Souliss_T1n_ToggleCmd, MYLEDLOGIC);
+DigIn2State(INPUTPIN, Souliss_T1n_ToggleCmd, Souliss_T1n_ToggleCmd, MYLEDLOGIC);
