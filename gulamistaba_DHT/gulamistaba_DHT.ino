@@ -14,7 +14,7 @@
 // Configure the framework
 #include "bconf/MCU_ESP8266.h"              // Load the code directly on the ESP8266
 #include "conf/DynamicAddressing.h"         // Use dynamic addresses
-#include "conf/RuntimeGateway.h"
+#include "conf/Gateway.h"
 
 // **** Define the WiFi name and password ****
 #define WIFICONF_INSKETCH
