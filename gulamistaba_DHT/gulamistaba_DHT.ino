@@ -13,9 +13,8 @@
 
 // Configure the framework
 #include "bconf/MCU_ESP8266.h"              // Load the code directly on the ESP8266
+#include "conf/DynamicAddressing.h"         // Use dynamic addresses
 #include "conf/RuntimeGateway.h"
-//#include "conf/Gateway.h"                 // The main node is the Gateway, we have just one node
-#include "conf/IPBroadcast.h"
 
 // **** Define the WiFi name and password ****
 #define WIFICONF_INSKETCH
@@ -59,14 +58,11 @@ void setup()
     // Set network IP parameters
     Souliss_SetIPAddress(ip_address, subnet_mask, ip_gateway);
     SetAsGateway(40);  // Use the last byte of the IP address if using a static IP address
+    SetAddressingServer();
     
     // This is the vNet address for this node, used to communicate with other
-	  // nodes in your Souliss network
+    // nodes in your Souliss network
     SetAddress(0xAB01, 0xFF00, 0x0000);
-    SetAsPeerNode(0xAB02, 1);
-    SetAsPeerNode(0xAB03, 2);
-
-
       
     Set_SimpleLight(MYLEDLOGIC);        // Define a simple LED light logic
 
@@ -74,7 +70,7 @@ void setup()
     Set_Humidity(HUMIDITY);
 	  
 	  pinMode(INPUTPIN, INPUT);
-    pinMode(OUTPUTPIN, OUTPUT);         // Use pin as output 
+	  pinMode(OUTPUTPIN, OUTPUT);         // Use pin as output 
 }
 
 void loop()
@@ -103,7 +99,7 @@ void loop()
 
 
             SLOW_10s() {  
-   // Read temperature and humidity from DHT every 10 seconds  
+   	   // Read temperature and humidity from DHT every 10 seconds  
            float h = dht.readHumidity();
               // Read temperature as Celsius
               float t = dht.readTemperature();
@@ -113,8 +109,10 @@ void loop()
                 //return;
               }
               
-             Souliss_ImportAnalog(memory_map, TEMPERATURE, &t);
+            Souliss_ImportAnalog(memory_map, TEMPERATURE, &t);
             Souliss_ImportAnalog(memory_map, HUMIDITY, &h); 
             } 
+    	// Here we periodically check for a gateway to join
+        SLOW_PeerJoin();
     }
 } 
