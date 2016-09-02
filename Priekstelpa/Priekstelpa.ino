@@ -22,6 +22,7 @@ WiFiManager wifi(0);
  
 // Configure the framework
 #include "bconf/MCU_ESP8266.h"              // Load the code directly on the ESP8266
+#include "conf/DynamicAddressing.h"         // Use dynamic address
 #include "conf/IPBroadcast.h"
 #include "Souliss.h"
 #include <DHT.h>
@@ -60,7 +61,8 @@ void setup(){
         Souliss_SetIPAddress(ip_address, subnet_mask, ip_gateway);
         SetAsGateway(41);  // Use the last byte of the IP address if using a static IP address
 
-        SetAddress(0xAB02, 0xFF00, 0x0000); //Antitheft & Temp/Hum esp12                         
+        SetDynamicAddressing();
+        GetAddress();                       
   
         
         // Set the typical to use
