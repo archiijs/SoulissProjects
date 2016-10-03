@@ -13,8 +13,7 @@
 
 // Configure the framework
 #include "bconf/MCU_ESP8266.h"              // Load the code directly on the ESP8266
-#include "conf/RuntimeGateway.h"
-//#include "conf/Gateway.h"                 // The main node is the Gateway, we have just one node
+#include "conf/Gateway.h"                 // The main node is the Gateway, we have just one node
 #include "conf/IPBroadcast.h"
 
 // **** Define the WiFi name and password ****
