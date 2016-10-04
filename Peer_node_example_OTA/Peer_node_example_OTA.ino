@@ -1,20 +1,13 @@
 /**************************************************************************
     Souliss - Hello World for Expressif ESP8266
-    
-    This is the basic example, create a software push-button on Android
-    using SoulissApp (get it from Play Store).  
-    
-    Load this code on ESP8266 board using the porting of the Arduino core
-    for this platform.
-
 ***************************************************************************/
 
 // Let the IDE point to the Souliss framework
-#include "SoulissFramework.h"
+#include                        "SoulissFramework.h"
 
 // Configure the framework
-#include "bconf/MCU_ESP8266.h"              // Load the code directly on the ESP8266
-#include "conf/IPBroadcast.h"
+#include                        "bconf/MCU_ESP8266.h"              // Load the code directly on the ESP8266
+#include                        "conf/IPBroadcast.h"
 
 // **** Define the WiFi name and password ****
 #define WIFICONF_INSKETCH
@@ -28,24 +21,26 @@
 
 /*** All configuration includes should be above this line ***/ 
 #include "Souliss.h"
-#include "DHT.h"                      //Include and Configure DHT21 SENSOR
+#include "DHT.h"                                                   //Include and Configure DHT21 SENSOR
 
 // This identify the number of the LED logic
 #define MYLEDLOGIC              0
-#define MYPIRLOGIC              1      
-#define TEMPERATURE             2
-#define HUMIDITY                4
+#define MYPIRLOGIC              1
+#define MYDOORLOGIC             2      
+#define TEMPERATURE             3
+#define HUMIDITY                5
 
-#define DEADBAND                0.01       // Deadband value 1%
+#define DEADBAND                0.01                               // Deadband value 1%
          
 // **** Define here the right pin for your ESP module **** 
-#define	RELAYOUT			          D0    
-#define BUTONIN                 D1    
-#define DHTIN                   D2    //DHT21
-#define PIRIN                   D3    //PIRIN
+#define	RELAYOUT			          D0                                 //Output for light relay
+#define BUTONIN                 D1                                 //Light switch
+#define DHTIN                   D2                                 //DHT21
+#define PIRIN                   D3                                 //Input for PIR sensor (Hi and Lo)
+#define DOORIN                  D4                                 //Input for Door open sensor (Hi and Lo)
 
-#define DHTTYPE DHT21                 //DHT21 
-DHT dht(DHTIN, DHTTYPE, 15);
+#define DHTTYPE DHT21                                              //DHT21 setup
+DHT dht(DHTIN, DHTTYPE, 15);                                       //DHT setup for esp
 
 // Define the network configuration according to your router settings
 uint8_t ip_address[4]  = {192, 168, 1, 42};
@@ -63,20 +58,22 @@ void setup()
 	// nodes in your Souliss network
     SetAddress(0xAB03, 0xFF00, 0xAB00);
     
-    Set_SimpleLight(MYLEDLOGIC);               // RELAY
-    Set_SimpleLight(MYPIRLOGIC);               // PIR
+    Set_SimpleLight(MYLEDLOGIC);                                 // RELAY
+    Set_DigitalInput(MYPIRLOGIC);                                // PIR
+    Set_DigitalInput(MYDOORLOGIC);                               // Door open/close (reed switch)
     Set_Temperature(TEMPERATURE);
     Set_Humidity(HUMIDITY);
     
-    pinMode(RELAYOUT, OUTPUT);                 // Relay out
-    pinMode(BUTONIN, INPUT);                   // Hardware pulldown required
+    pinMode(RELAYOUT, OUTPUT);                                   // Relay out
+    pinMode(BUTONIN, INPUT);                                     // Hardware pulldown required
     pinMode(DHTIN, INPUT);
     pinMode(PIRIN, INPUT);
+    pinMode(DOORIN, INPUT);
     
     dht.begin();
 
     // Init the OTA
-    ArduinoOTA.setHostname("Paltes");    
+    ArduinoOTA.setHostname("Tests");    
     ArduinoOTA.begin();
     
 }   
@@ -94,8 +91,11 @@ void loop()
             Logic_SimpleLight(MYLEDLOGIC);                                                        // Drive the LED as per command
             DigOut(RELAYOUT, Souliss_T1n_Coil, MYLEDLOGIC);                                       // Use the pin9 to give power to the LED according to the logic
 
-            DigIn(PIRIN, Souliss_T1n_ToggleCmd, MYPIRLOGIC);                                      //LED logic for PIR
-            Logic_SimpleLight(MYPIRLOGIC);
+            DigIn2State(PIRIN, Souliss_T1n_OnCmd, Souliss_T1n_OffCmd, MYPIRLOGIC);                //PIR input (High on, Low off)
+            Logic_DigitalInput(MYPIRLOGIC);
+
+            DigIn2State(DOORIN, Souliss_T1n_OnCmd, Souliss_T1n_OffCmd, MYDOORLOGIC);              //DOOR state input (High on, Low off)
+            Logic_DigitalInput(MYDOORLOGIC);
         
         }
 
