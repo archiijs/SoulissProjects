@@ -57,6 +57,7 @@ void setup()
     SetAddress(0xAB01, 0xFF00, 0x0000);
     SetAsPeerNode(0xAB02, 1);                                 //Koridors
     SetAsPeerNode(0xAB03, 2);                                 //Ars
+    SetAsPeerNode(0xAB04, 3);                                 //TST
       
     Set_SimpleLight(MYLEDLOGIC);                              // Define a simple LED light logic
     Set_Temperature(TEMPERATURE);
