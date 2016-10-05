@@ -43,7 +43,7 @@
 DHT dht(DHTIN, DHTTYPE, 15);                                       //DHT setup for esp
 
 // Define the network configuration according to your router settings
-uint8_t ip_address[4]  = {192, 168, 1, 43};
+uint8_t ip_address[4]  = {192, 168, 1, 42};
 uint8_t subnet_mask[4] = {255, 255, 255, 0};
 uint8_t ip_gateway[4]  = {192, 168, 1, 1};
 
@@ -56,7 +56,7 @@ void setup()
 
     // This is the vNet address for this node, used to communicate with other
 	  // nodes in your Souliss network
-    SetAddress(0xAB04, 0xFF00, 0xAB00);
+    SetAddress(0xAB03, 0xFF00, 0xAB00);
     
     Set_SimpleLight(MYLEDLOGIC);                                 // RELAY
     Set_DigitalInput(MYPIRLOGIC);                                // PIR
@@ -73,7 +73,7 @@ void setup()
     dht.begin();
 
     // Init the OTA
-    ArduinoOTA.setHostname("TST");    
+    ArduinoOTA.setHostname("Ars");    
     ArduinoOTA.begin();
     
 }   
