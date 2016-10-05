@@ -55,7 +55,7 @@ void setup()
     Souliss_SetIPAddress(ip_address, subnet_mask, ip_gateway);                          
 
     // This is the vNet address for this node, used to communicate with other
-	// nodes in your Souliss network
+	  // nodes in your Souliss network
     SetAddress(0xAB03, 0xFF00, 0xAB00);
     
     Set_SimpleLight(MYLEDLOGIC);                                 // RELAY
@@ -73,7 +73,7 @@ void setup()
     dht.begin();
 
     // Init the OTA
-    ArduinoOTA.setHostname("Tests");    
+    ArduinoOTA.setHostname("Ars");    
     ArduinoOTA.begin();
     
 }   
@@ -130,6 +130,6 @@ void loop()
         } 
     } 
      
-    // Look for a new sketch to update over the air
-    ArduinoOTA.handle();
+// Look for a new sketch to update over the air
+ArduinoOTA.handle();
 } 
