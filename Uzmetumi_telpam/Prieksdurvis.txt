@@ -1,0 +1,30 @@
+1x vai 2x Gaismas                   -1/2x releji/SSR
+1x Kustību sensors                  -1x PIR
+1x Āra temp/mitruma sensors         -1x DHT21/DHT22
+2x Slēdži (viens iekšā viens ārā)   -2x Slēdzis
+1x Gaismas sensors?                 -1x LDR
+1x Durvju sensors                   -1x REED switch
+2x Slēdzenes stāvoklis              -2x Slēdži slēdzenē
+1x Zvana poga
+
+
+
+-----------------
+Ieejas
+1x PIR
+1x DHT2*
+1x Slēdži (slēdži divi, bet saslēgti virknē= 1 ieeja)
+1x LDR
+1x REED switch
+2x Slēdzenes slēdži (varbūt var analogi ar vienu ieeju caur pretestībām)
+1x Zvana poga
+=8 ieejas
+
+
+------------------
+Izejas
+1-2x Relejs/i SSR
+=1-2
+
+Kopā
+9-10 Io's
