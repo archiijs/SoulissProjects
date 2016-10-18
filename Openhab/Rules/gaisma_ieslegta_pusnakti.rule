@@ -1,6 +1,6 @@
 rule "Beninu gaisma nav izslegta"
     when
-        Time cron "0 0 * * *"
+        Time cron "0 0 0 1/1 * ? *" //katru dienu pusnaktii
     then
         if(Gaisma3.state==ON) 
 		{
