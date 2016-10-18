@@ -1,0 +1,12 @@
+rule "Beninu gaisma nav izslegta"
+    when
+        Time cron "0 0 * * *"
+    then
+        if(Gaisma3.state==ON) 
+		{
+            	sendNotification("artursstipnieks@gmail.com", "jau pusnakts, bet bēniņu gaisma nav izslēgta")
+		sendNotification("SIEVA@gmail.com", "jau pusnakts, bet bēniņu gaisma nav izslēgta")
+		Twitter anouncment
+        	} 
+
+    end
