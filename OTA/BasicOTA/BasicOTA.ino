@@ -3,8 +3,8 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 
-const char* ssid = "Paltes";
-const char* password = "virus.exe";
+const char* ssid = "";
+const char* password = "";
 
 void setup() {
   Serial.begin(115200);
