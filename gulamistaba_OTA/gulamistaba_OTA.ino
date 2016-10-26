@@ -11,8 +11,8 @@
 
 // **** Define the WiFi name and password ****
 #define WIFICONF_INSKETCH
-#define WiFi_SSID              "Paltes"
-#define WiFi_Password          "virus.exe"    
+#define WiFi_SSID              ""
+#define WiFi_Password          ""    
 
 // Include framework code and libraries
 #include <ESP8266WiFi.h>
